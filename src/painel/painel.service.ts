@@ -15,7 +15,8 @@ export class PainelService implements OnModuleInit {
 
     public async onModuleInit() {
         console.log('Iniciando PainelService...');
-        await this.findBookingsDbById();
+        // await this.findBookingsDbById();
+        await this.getApiDataForBookings(['21442821']);
     }
 
     public async findBookingsDbById() {
@@ -28,4 +29,69 @@ export class PainelService implements OnModuleInit {
             throw e;
         }
     }
+
+    public async getApiDataForBookings(ids: string[]) {
+        try {
+            const apiResponses = await Promise.all(
+                ids.map(async (id) => {
+                    try {
+                        const response = await this.http.get(`/bookings/${id}`);
+
+                        const occupant = response.data.data.occupant.name;
+                        const surname = response.data.data.occupant.surnames;
+                        const fullName = surname ? `${occupant} ${surname}` : occupant;
+
+                        return {
+                            fullName
+                        };
+                    } catch (error) {
+                        console.error(`Erro ao buscar dados da API para o ID ${id}:`, error);
+                        return;
+                    }
+                })
+            );
+            console.log('Dados da API externa:', apiResponses);
+            return apiResponses;
+        } catch (error) {
+            console.error('Erro ao buscar dados da API:', error);
+            throw error;
+        }
+    }
+
+
+    // public async getApiByBookingData() {
+    //     try {
+    //         const bookings = await this.findBookingsDbById() || [];
+
+    //         if (!Array.isArray(bookings) || bookings.length === 0) {
+    //             console.log('Nenhuma reserva encontrada.');
+    //             return [];
+    //         }
+
+    //         const ids = bookings.map((booking) => booking.id);
+    //         if (!Array.isArray(ids) || ids.length === 0) {
+    //             console.log('Nenhum ID válido encontrado.');
+    //             return [];
+    //         }
+
+    //         const apiDataList = await this.getApiDataForBookings(ids) || [];
+
+    //         if (!Array.isArray(apiDataList)) {
+    //             console.error('Os dados da API não foram retornados corretamente.');
+    //             return [];
+    //         }
+
+    //         const combinedData = bookings.map((booking) => {
+    //             const apiData = apiDataList.find((data) => data.id === booking.id)?.apiData || null;
+    //             return { ...booking, apiData };
+    //         });
+
+    //         console.log('Dados combinados:', combinedData);
+    //         return combinedData;
+    //     } catch (error) {
+    //         console.error('Erro ao combinar dados:', error);
+    //         throw error;
+    //     }
+    // }
+
 }
