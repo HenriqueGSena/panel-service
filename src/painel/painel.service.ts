@@ -36,15 +36,18 @@ export class PainelService implements OnModuleInit {
                 ids.map(async (id) => {
                     try {
                         const response = await this.http.get(`/bookings/${id}`);
+                        const arrivalHours = '15:00';
 
-                        const occupant = response.data.data.occupant.name;
-                        const surname = response.data.data.occupant.surnames;
+                        const occupant = response.data.data.occupant?.name;
+                        const surname = response.data.data.occupant?.surnames;
                         const fullName = surname ? `${occupant} ${surname}` : occupant;
-                        const checkin = response.data.data.checkIn.done;
+                        const checkin = response.data.data.checkIn?.done;
+                        const arrivalInfo = response.data.data.arrivalInfo?.checkInTime ?? `${arrivalHours}`;
 
                         return {
                             fullName,
-                            checkin
+                            checkin,
+                            arrivalInfo,
                         };
                     } catch (error) {
                         console.error(`Erro ao buscar dados da API para o ID ${id}:`, error);
