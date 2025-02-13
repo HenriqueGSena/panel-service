@@ -16,7 +16,7 @@ export class PainelService implements OnModuleInit {
     public async onModuleInit() {
         console.log('Iniciando PainelService...');
         // await this.findBookingsDbById();
-        await this.getApiDataForBookings(['21442821']);
+        await this.getApiDataForBookings(['21442821', '11483041']);
     }
 
     public async findBookingsDbById() {
@@ -40,9 +40,11 @@ export class PainelService implements OnModuleInit {
                         const occupant = response.data.data.occupant.name;
                         const surname = response.data.data.occupant.surnames;
                         const fullName = surname ? `${occupant} ${surname}` : occupant;
+                        const checkin = response.data.data.checkIn.done;
 
                         return {
-                            fullName
+                            fullName,
+                            checkin
                         };
                     } catch (error) {
                         console.error(`Erro ao buscar dados da API para o ID ${id}:`, error);
