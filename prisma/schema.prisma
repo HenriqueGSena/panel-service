@@ -8,20 +8,21 @@ datasource db {
 }
 
 model accommodation {
-  id_acc          String  @id @db.VarChar
-  status          String? @db.VarChar
-  nome_acomodacao String? @db.VarChar
+  id_acc          String     @id @db.VarChar
+  status          String?    @db.VarChar
+  nome_acomodacao String?    @db.VarChar
   tamanho         Int?
-  cama            String? @db.VarChar
+  cama            String?    @db.VarChar
   qtde_quartos    Int?
   qtde_banheiros  Float?
-  cod_pais        String? @db.VarChar
-  cidade          String? @db.VarChar
-  endereco        String? @db.VarChar
-  bairro          String? @db.VarChar
+  cod_pais        String?    @db.VarChar
+  cidade          String?    @db.VarChar
+  endereco        String?    @db.VarChar
+  bairro          String?    @db.VarChar
   latitude        Float?
   longitude       Float?
   capacidade      Int?
+  bookings        bookings[] @relation("AccommodationToBookings")
 }
 
 model accommodation_price {
@@ -35,20 +36,21 @@ model accommodation_price {
 }
 
 model bookings {
-  id_booking         String  @id @db.VarChar
-  portal_reference   String? @db.VarChar
-  check_in_data      String? @db.VarChar
-  check_out_data     String? @db.VarChar
-  reservation_date   String? @db.VarChar
-  status             String? @db.VarChar
-  accommodation_code String? @db.VarChar
-  sale_channel       String? @db.VarChar
+  id_booking         String         @id @db.VarChar
+  portal_reference   String?        @db.VarChar
+  check_in_data      String?        @db.VarChar
+  check_out_data     String?        @db.VarChar
+  reservation_date   String?        @db.VarChar
+  status             String?        @db.VarChar
+  accommodation_code String?        @db.VarChar
+  sale_channel       String?        @db.VarChar
   total_payment      Float?
   net_payment        Float?
   extra_value        Float?
-  extra_descrition   String? @db.VarChar
+  extra_descrition   String?        @db.VarChar
   portal_comission   Float?
   update_date        String?
+  accommodation      accommodation? @relation("AccommodationToBookings", fields: [accommodation_code], references: [id_acc])
 }
 
 model bookings_1 {

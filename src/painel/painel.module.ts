@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { PainelService } from './painel.service';
-import { PrismaModule } from '../prisma/prisma.module'
+import { HttpService } from '../http/http.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Module({
-  imports: [PrismaModule],
-  providers: [PainelService]
+  imports: [],
+  providers: [PainelService, HttpService, PrismaService]
 })
 export class PainelModule {}
