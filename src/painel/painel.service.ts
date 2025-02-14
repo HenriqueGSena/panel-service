@@ -1,10 +1,12 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable, OnModuleInit, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { HttpService } from '../http/http.service';
 import { Bookings } from './interfaces/bookings';
+import { Cron } from '@nestjs/schedule';
 
 @Injectable()
 export class PainelService implements OnModuleInit {
+    private readonly logger = new Logger(PainelService.name);
     private readonly http;
 
     constructor(
@@ -25,6 +27,17 @@ export class PainelService implements OnModuleInit {
         }
         const mergedBookings = await this.getMergedBookingsData();
         // console.log('Bookings unidos:', mergedBookings);
+    }
+
+    @Cron('0 0 * * * *')
+    async checkBookingHours() {
+        this.logger.log('⚡ [Cron Job] Executando tarefa programada...');
+
+        const dbBooking = await this.findBookingsDbById();
+        this.logger.debug(`📌 Dados do Banco: ${JSON.stringify(dbBooking)}`);
+
+        const bookingApi = await this.getApiDataForBookings(dbBooking.map(b => b.id));
+        this.logger.debug(`🌍 Dados da API: ${JSON.stringify(bookingApi)}`);
     }
 
 
@@ -81,7 +94,7 @@ export class PainelService implements OnModuleInit {
                 ...booking,
                 ...(apiBookings[index] || {}),
             }));
-            // console.log('Bookings unidos:', mergedBookings);
+            console.log('Bookings unidos:', mergedBookings);
             return mergedBookings;
         } catch (err) {
             console.error('Erro ao mesclar os dados dos bookings:', err);
