@@ -4,41 +4,10 @@ import { PrismaClient } from '@prisma/client';
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
   async onModuleInit() {
-    console.log('Conectando ao banco de dados...');
+    // console.log('Conectando ao banco de dados...');
     await this.$connect();
-    console.log('Conexão estabelecida com sucesso.');
-    // await this.findBookingAndAccomodation();
+    // console.log('Conexão estabelecida com sucesso.');
   }
-
-  // public async findBookingAndAccommodation() {
-  //   const prisma = new PrismaClient();
-
-  //   const today = new Date().toISOString().split('T')[0];
-
-  //   const reservas = await prisma.bookings.findMany({
-  //     where: {
-  //       check_in_data: today,
-  //       status: {
-  //         in: ['CONFIRMED', 'UNPAID'],
-  //       },
-  //     },
-  //     select: {
-  //       id_booking: true,
-  //       portal_reference: true,
-  //       sale_channel: true,
-  //       check_in_data: true,
-  //       check_out_data: true,
-  //       accommodation: {
-  //         select: {
-  //           nome_acomodacao: true,
-  //         },
-  //       },
-  //     },
-  //   });
-
-  //   console.log('Reservas encontradas:', reservas);
-  // }
-
 
   public async findBookingAndAccomodation() {
     const result = await this.$queryRaw`
