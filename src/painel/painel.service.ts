@@ -1,6 +1,7 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { HttpService } from '../http/http.service';
+import { Bookings } from './interfaces/bookings';
 
 @Injectable()
 export class PainelService implements OnModuleInit {
@@ -15,14 +16,22 @@ export class PainelService implements OnModuleInit {
 
     public async onModuleInit() {
         console.log('Iniciando PainelService...');
-        // await this.findBookingsDbById();
-        await this.getApiDataForBookings(['21442821', '11483041']);
+        const dbBookings = await this.findBookingsDbById();
+        const bookingIds = dbBookings.map((booking) => booking.id);
+        if (bookingIds.length > 0) {
+            await this.getApiDataForBookings(bookingIds);
+        } else {
+            console.log('Nenhum ID de reserva encontrado no banco de dados.');
+        }
+        const mergedBookings = await this.getMergedBookingsData();
+        console.log('Bookings unidos:', mergedBookings);
     }
 
-    public async findBookingsDbById() {
+
+    public async findBookingsDbById(): Promise<Bookings[]> {
         try {
-            const db = await this.prismaService.findBookingAndAccomodation();
-            console.log('Retorno dos bookings vindos do banco de dados:', db);
+            const db = await this.prismaService.findBookingAndAccomodation() as Bookings[];
+            // console.log('Retorno dos bookings vindos do banco de dados:', db);
             return db;
         } catch (e) {
             console.error('Erro ao buscar bookings:', e);
@@ -55,7 +64,7 @@ export class PainelService implements OnModuleInit {
                     }
                 })
             );
-            console.log('Dados da API externa:', apiResponses);
+            // console.log('Dados da API externa:', apiResponses);
             return apiResponses;
         } catch (error) {
             console.error('Erro ao buscar dados da API:', error);
@@ -63,40 +72,21 @@ export class PainelService implements OnModuleInit {
         }
     }
 
-
-    // public async getApiByBookingData() {
-    //     try {
-    //         const bookings = await this.findBookingsDbById() || [];
-
-    //         if (!Array.isArray(bookings) || bookings.length === 0) {
-    //             console.log('Nenhuma reserva encontrada.');
-    //             return [];
-    //         }
-
-    //         const ids = bookings.map((booking) => booking.id);
-    //         if (!Array.isArray(ids) || ids.length === 0) {
-    //             console.log('Nenhum ID válido encontrado.');
-    //             return [];
-    //         }
-
-    //         const apiDataList = await this.getApiDataForBookings(ids) || [];
-
-    //         if (!Array.isArray(apiDataList)) {
-    //             console.error('Os dados da API não foram retornados corretamente.');
-    //             return [];
-    //         }
-
-    //         const combinedData = bookings.map((booking) => {
-    //             const apiData = apiDataList.find((data) => data.id === booking.id)?.apiData || null;
-    //             return { ...booking, apiData };
-    //         });
-
-    //         console.log('Dados combinados:', combinedData);
-    //         return combinedData;
-    //     } catch (error) {
-    //         console.error('Erro ao combinar dados:', error);
-    //         throw error;
-    //     }
-    // }
+    public async getMergedBookingsData() {
+        try {
+            const dbBookings = (await this.findBookingsDbById());
+            const bookingIds = dbBookings.map((booking) => booking.id);
+            const apiBookings = await this.getApiDataForBookings(bookingIds);
+            const mergedBookings = dbBookings.map((booking, index) => ({
+                ...booking,
+                ...(apiBookings[index] || {}),
+            }));
+            // console.log('Bookings unidos:', mergedBookings);
+            return mergedBookings;
+        } catch (err) {
+            console.error('Erro ao mesclar os dados dos bookings:', err);
+            throw err;
+        }
+    }
 
 }
