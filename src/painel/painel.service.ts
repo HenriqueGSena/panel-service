@@ -50,12 +50,12 @@ export class PainelService implements OnModuleInit {
                         const occupant = response.data.data.occupant?.name;
                         const surname = response.data.data.occupant?.surnames;
                         const fullName = surname ? `${occupant} ${surname}` : occupant;
-                        const checkin = response.data.data.checkIn?.done;
+                        const checkinOnline = response.data.data.checkIn?.done;
                         const arrivalInfo = response.data.data.arrivalInfo?.checkInTime ?? `${arrivalHours}`;
 
                         return {
                             fullName,
-                            checkin,
+                            checkinOnline,
                             arrivalInfo,
                         };
                     } catch (error) {
