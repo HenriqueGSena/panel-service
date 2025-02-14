@@ -24,7 +24,7 @@ export class PainelService implements OnModuleInit {
             console.log('Nenhum ID de reserva encontrado no banco de dados.');
         }
         const mergedBookings = await this.getMergedBookingsData();
-        console.log('Bookings unidos:', mergedBookings);
+        // console.log('Bookings unidos:', mergedBookings);
     }
 
 
