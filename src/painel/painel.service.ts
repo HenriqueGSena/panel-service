@@ -34,10 +34,10 @@ export class PainelService implements OnModuleInit {
         this.logger.log('⚡ [Cron Job] Executando tarefa programada...');
 
         const dbBooking = await this.findBookingsDbById();
-        this.logger.debug(`📌 Dados do Banco: ${JSON.stringify(dbBooking)}`);
+        // this.logger.debug(`📌 Dados do Banco: ${JSON.stringify(dbBooking)}`);
 
         const bookingApi = await this.getApiDataForBookings(dbBooking.map(b => b.id));
-        this.logger.debug(`🌍 Dados da API: ${JSON.stringify(bookingApi)}`);
+        // this.logger.debug(`🌍 Dados da API: ${JSON.stringify(bookingApi)}`);
     }
 
 
@@ -94,7 +94,7 @@ export class PainelService implements OnModuleInit {
                 ...booking,
                 ...(apiBookings[index] || {}),
             }));
-            console.log('Bookings unidos:', mergedBookings);
+            // console.log('Bookings unidos:', mergedBookings);
             return mergedBookings;
         } catch (err) {
             console.error('Erro ao mesclar os dados dos bookings:', err);
