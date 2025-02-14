@@ -1,4 +1,4 @@
-name: Painel Server Application 1.0
+name: Painel Server Application
 
 on:
   push:
