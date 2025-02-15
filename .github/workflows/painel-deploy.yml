@@ -32,5 +32,5 @@ jobs:
     # Etapa 4: Construção de imagem Docker
     - name: Build and Push Docker Image
       run: |
-        docker-compose -f panel-service/docker-compose.yml build
-        docker-compose -f panel-service/docker-compose.yml push
+        docker-compose -f docker-compose.yml build
+        docker-compose -f docker-compose.yml push
