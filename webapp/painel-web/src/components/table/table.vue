@@ -14,7 +14,7 @@
                                     <th scope="col" class="px-3 py-4 text-left font-semibold text-gray-900">
                                         <span v-text="$t('lang.table.portal')"></span>
                                     </th>
-                                    <th scope="col" class="px-3 py-4 text-left font-semibold text-gray-900">
+                                    <th scope="col" class="px-5 py-4 text-left font-semibold text-gray-900">
                                         <span v-text="$t('lang.table.namePortal')"></span>
                                     </th>
                                     <th scope="col" class="px-3 py-4 text-left font-semibold text-gray-900">
@@ -57,8 +57,8 @@
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4">
                                         <span :class="service.checkinOnline
-                                            ? 'bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium'
-                                            : 'bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-medium'">
+                                            ? 'bg-green-200 text-green-900 px-2 py-1 rounded-lg text-xs font-bold'
+                                            : 'bg-red-200 text-red-900 px-2 py-1 rounded-lg text-xs font-bold'">
                                             {{ service.checkinOnline ? 'Realizado' : 'Não Realizado' }}
                                         </span>
                                     </td>

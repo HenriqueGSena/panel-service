@@ -5,13 +5,12 @@ import ApiService from "@/service/service";
 export default class Table extends Vue {
     public services: any[] = [];
     public currentPage: number = 1;
-    public itemsPerPage: number = 6;
+    public itemsPerPage: number = 8;
     private intervalId: number | null = null;
     private apiService: ApiService = new ApiService();
 
     mounted() {
         this.loadServices();
-        console.log(this.loadServices)
         this.startAutoPagination();
     }
 

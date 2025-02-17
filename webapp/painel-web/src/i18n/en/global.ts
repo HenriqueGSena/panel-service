@@ -6,12 +6,12 @@ export const optionsLanguages = {
         table: {
             client: 'Cliente',
             portal: 'Código Portal',
-            namePortal: 'Nome Portal',
+            namePortal: 'Portal',
             checkin: 'Check-in',
             checkout: 'Check-out',
             CodAcc: 'Código Acomodação',
             checkOnline: 'Check-in Online',
-            arrivalInfo: 'Informações de chegada',
+            arrivalInfo: 'Horário Chegada',
             page: 'Página',
             de: 'de'
         }
