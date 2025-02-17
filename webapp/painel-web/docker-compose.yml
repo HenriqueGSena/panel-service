@@ -4,13 +4,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: pineapples-dashboard-app
+    image: painel-web:1.0.0
     restart: always
     environment:
       - TZ=America/Sao_Paulo
     ports:
-      - "3000:80"
-    container_name: pineapples-dashboard
-
-
-
+      - "3000:3000"
+    container_name: painel-web
+    command: ["npm", "run", "start"]

@@ -22,8 +22,8 @@ FROM nginx:stable-alpine
 # Copiar os arquivos do build para o diretório padrão do Nginx
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Expor a porta 80
-EXPOSE 80
+# Expor a porta
+EXPOSE 3000
 
 # Comando padrão para iniciar o Nginx
 CMD ["nginx", "-g", "daemon off;"]
