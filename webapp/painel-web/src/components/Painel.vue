@@ -2,7 +2,7 @@
   <div class="bg-painel-bg bg-cover bg-center min-h-screen">
     <div class="absolute top-4 w-full">
       <Dashboard />
-      <Cleaning />
+      <Table />
     </div>
   </div>
 </template>

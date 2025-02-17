@@ -1,11 +1,11 @@
 import { Options, Vue } from "vue-class-component";
 import Dashboard from "./dashboard/dashboard.vue";
-import Cleaning from "./table/Cleaning.vue";
+import Table from "./table/table.vue";
 
 @Options({
     components: {
         Dashboard,
-        Cleaning,
+        Table,
     },
 })
 export default class Painel extends Vue { }

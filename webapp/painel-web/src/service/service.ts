@@ -4,7 +4,7 @@ export default class ApiService {
 
     public async getAllServicesCleaning(): Promise<any[]> {
         try {
-            const response = await api.get('/bookings/checkout');
+            const response = await api.get('/painel/bookings');
             return response.data;
         } catch (err) {
             console.error('Erro ao retornar a lista atraves da requisicao', err);

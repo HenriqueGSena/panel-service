@@ -7,7 +7,7 @@
                         <img class="mx-auto size-20 rounded-full" src="../../assets/pine.png" alt="">
                     </div>
                     <div class="flex flex-col items-center sm:items-start">
-                        <span class="text-xl font-bold text-gray-900 sm:text-4xl"
+                        <span class="text-xl font-bold text-gray-900 sm:text-3xl"
                             v-text="$t('lang.dash.cleaning')">
                         </span>
                     </div>

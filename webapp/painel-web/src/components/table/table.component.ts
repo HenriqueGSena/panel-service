@@ -2,7 +2,7 @@ import { Vue } from "vue-class-component";
 import { StatusService } from "@/interface/statusService";
 import ApiService from "@/service/service";
 
-export default class Cleaning extends Vue {
+export default class Table extends Vue {
     public services: any[] = [];
     public currentPage: number = 1;
     public itemsPerPage: number = 6;
@@ -11,6 +11,7 @@ export default class Cleaning extends Vue {
 
     mounted() {
         this.loadServices();
+        console.log(this.loadServices)
         this.startAutoPagination();
     }
 
@@ -20,7 +21,18 @@ export default class Cleaning extends Vue {
 
     public async loadServices() {
         try {
-            this.services = await this.apiService.getAllServicesCleaning();
+            const response = await this.apiService.getAllServicesCleaning();
+            this.services = response.map((service: any) => ({
+                id: service.id,
+                codportal: service.codportal,
+                nomeportal: service.nomeportal,
+                checkin: service.checkin,
+                checkout: service.checkout,
+                nomeacomodacao: service.nomeacomodacao,
+                fullName: service.fullName,
+                checkinOnline: service.checkinOnline,
+                arrivalInfo: service.arrivalInfo
+            }));
         } catch (err) {
             console.error("Erro ao carregar serviços", err);
         }

@@ -5,8 +5,13 @@ export const optionsLanguages = {
         },
         table: {
             client: 'Cliente',
-            accom: 'Acomodação',
-            service: 'Serviço',
+            portal: 'Código Portal',
+            namePortal: 'Nome Portal',
+            checkin: 'Check-in',
+            checkout: 'Check-out',
+            CodAcc: 'Código Acomodação',
+            checkOnline: 'Check-in Online',
+            arrivalInfo: 'Informações de chegada',
             page: 'Página',
             de: 'de'
         }
