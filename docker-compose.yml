@@ -9,6 +9,6 @@ services:
     environment:
       - TZ=America/Sao_Paulo
     ports:
-      - "3000:3000"
+      - "9090:9090"
     container_name: painel-server
     command: ["npm", "run", "start:prod"]
