@@ -4,37 +4,37 @@
             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                     <div class="overflow-hidden shadow ring-1 ring-black/5 sm:rounded-lg">
-                        <table class="min-w-full divide-y divide-gray-300">
+                        <table class="min-w-full divide-y divide-gray-300 bg-gray-50">
                             <thead class="bg-gray-50">
                                 <tr>
                                     <th scope="col"
-                                        class="py-3.5 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6">
+                                        class="py-4 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-6">
                                         <span v-text="$t('lang.table.client')"></span>
                                     </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left font-semibold text-gray-900">
+                                    <th scope="col" class="px-3 py-4 text-left font-semibold text-gray-900">
                                         <span v-text="$t('lang.table.portal')"></span>
                                     </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left font-semibold text-gray-900">
+                                    <th scope="col" class="px-3 py-4 text-left font-semibold text-gray-900">
                                         <span v-text="$t('lang.table.namePortal')"></span>
                                     </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left font-semibold text-gray-900">
+                                    <th scope="col" class="px-3 py-4 text-left font-semibold text-gray-900">
                                         <span v-text="$t('lang.table.checkin')"></span>
                                     </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left font-semibold text-gray-900">
+                                    <th scope="col" class="px-3 py-4 text-left font-semibold text-gray-900">
                                         <span v-text="$t('lang.table.checkout')"></span>
                                     </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left font-semibold text-gray-900">
+                                    <th scope="col" class="px-3 py-4 text-left font-semibold text-gray-900">
                                         <span v-text="$t('lang.table.CodAcc')"></span>
                                     </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left font-semibold text-gray-900">
+                                    <th scope="col" class="px-3 py-4 text-left font-semibold text-gray-900">
                                         <span v-text="$t('lang.table.checkOnline')"></span>
                                     </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left font-semibold text-gray-900">
+                                    <th scope="col" class="px-3 py-4 text-left font-semibold text-gray-900">
                                         <span v-text="$t('lang.table.arrivalInfo')"></span>
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-gray-200 bg-white">
+                            <tbody class="divide-y divide-gray-300 bg-white">
                                 <tr v-for="service in paginatedServices" :key="service.id">
                                     <td class="whitespace-nowrap py-4 pl-4 font-semibold text-gray-900">
                                         {{ service.fullName }}
@@ -42,8 +42,9 @@
                                     <td class="whitespace-nowrap px-3 py-4 text-gray-900">
                                         {{ service.codportal }}
                                     </td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-gray-900">
-                                        {{ service.nomeportal }}
+                                    <td class="whitespace-nowrap px-10 py-4 text-center text-gray-900">
+                                        <img :src="getIconForPortal(service.nomeportal)" alt="Ícone do portal"
+                                            class="w-6 h-6" />
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-gray-900">
                                         {{ formatDate(service.checkin) }}
@@ -61,10 +62,10 @@
                                             {{ service.checkinOnline ? 'Realizado' : 'Não Realizado' }}
                                         </span>
                                     </td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-gray-900">
+                                    <td class="whitespace-nowrap px-10 py-4 text-gray-900">
                                         {{ service.arrivalInfo }}
                                     </td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-gray-900">
+                                    <td class="whitespace-nowrap py-4 text-gray-900">
                                         {{ translateService(service.statusService) }}
                                     </td>
                                 </tr>

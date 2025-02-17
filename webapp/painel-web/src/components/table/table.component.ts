@@ -38,6 +38,17 @@ export default class Table extends Vue {
         }
     }
 
+    public portalIcons: { [key: string]: string } = {
+        'Airbnb': require('@/assets/icons/airbnb.png'),
+        'TravelStaytion.com': require('@/assets/icons/travelstaytion.png'),
+        'Booking.com': require('@/assets/icons/booking.png'),
+        'Pineapples': require('@/assets/icons/pineapples.png'),
+    };
+
+    public getIconForPortal(nomeportal: string): string {
+        return this.portalIcons[nomeportal] || '';
+    }
+
     public startAutoPagination() {
         this.intervalId = setInterval(() => {
             this.nextPage();
