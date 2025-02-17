@@ -54,8 +54,12 @@
                                     <td class="whitespace-nowrap px-3 py-4 text-gray-900">
                                         {{ service.nomeacomodacao }}
                                     </td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-gray-900">
-                                        {{ service.checkinOnline ? 'Realizado' : 'Não Realizado' }}
+                                    <td class="whitespace-nowrap px-3 py-4">
+                                        <span :class="service.checkinOnline
+                                            ? 'bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium'
+                                            : 'bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-medium'">
+                                            {{ service.checkinOnline ? 'Realizado' : 'Não Realizado' }}
+                                        </span>
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-gray-900">
                                         {{ service.arrivalInfo }}
