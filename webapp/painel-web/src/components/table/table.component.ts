@@ -5,7 +5,7 @@ import ApiService from "@/service/service";
 export default class Table extends Vue {
     public services: any[] = [];
     public currentPage: number = 1;
-    public itemsPerPage: number = 8;
+    public itemsPerPage: number = 10;
     private intervalId: number | null = null;
     private apiService: ApiService = new ApiService();
 
