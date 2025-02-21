@@ -1,5 +1,5 @@
 <p align="center">
-  <a target="blank"><img src="./assets/logo/logo.png" width="400" alt="Logo Pineapples" /></a>
+  <a target="blank"><img src="./painel-server/assets/logo/logo.png" width="400" alt="Logo Pineapples" /></a>
 </p>
 
 <div>
